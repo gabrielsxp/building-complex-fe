@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/building-complex-fe/static/css/main.795991f2.chunk.css",
+    "main.js": "/building-complex-fe/static/js/main.8f9970e7.chunk.js",
+    "main.js.map": "/building-complex-fe/static/js/main.8f9970e7.chunk.js.map",
+    "runtime~main.js": "/building-complex-fe/static/js/runtime~main.23a23494.js",
+    "runtime~main.js.map": "/building-complex-fe/static/js/runtime~main.23a23494.js.map",
+    "static/js/2.498e9752.chunk.js": "/building-complex-fe/static/js/2.498e9752.chunk.js",
+    "static/js/2.498e9752.chunk.js.map": "/building-complex-fe/static/js/2.498e9752.chunk.js.map",
+    "index.html": "/building-complex-fe/index.html",
+    "precache-manifest.6ca31663270328b2a8352d681581e8e2.js": "/building-complex-fe/precache-manifest.6ca31663270328b2a8352d681581e8e2.js",
+    "service-worker.js": "/building-complex-fe/service-worker.js",
+    "static/css/main.795991f2.chunk.css.map": "/building-complex-fe/static/css/main.795991f2.chunk.css.map",
+    "static/media/b3.png": "/building-complex-fe/static/media/b3.04597af9.png",
+    "static/media/herobg.jpg": "/building-complex-fe/static/media/herobg.a853a9b9.jpg"
+  }
+}

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7313a69c15cdf760f19df4e34ae8031b",
+    "revision": "3488b07751bfabab0e6e3e26c48bafcf",
     "url": "/building-complex-fe/index.html"
   },
   {
-    "revision": "52b45f8298e0306194f5",
+    "revision": "978355f47422786a5d90",
     "url": "/building-complex-fe/static/css/main.795991f2.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/building-complex-fe/static/js/2.498e9752.chunk.js"
   },
   {
-    "revision": "52b45f8298e0306194f5",
-    "url": "/building-complex-fe/static/js/main.8f9970e7.chunk.js"
+    "revision": "978355f47422786a5d90",
+    "url": "/building-complex-fe/static/js/main.7c146100.chunk.js"
   },
   {
     "revision": "b0d1d7c38d552e800d96",

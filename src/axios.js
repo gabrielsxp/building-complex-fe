@@ -16,4 +16,10 @@ instance.interceptors.request.use(async config => {
     return config;
 });
 
+instance.interceptors.response.use((response) => {
+    return response;
+}, (error) => {
+    return Promise.reject(error.response.data.error);
+});
+
 export default instance;

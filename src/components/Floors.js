@@ -27,6 +27,7 @@ class Floors extends React.Component {
         people: 0,
         role: null,
         accessing: false,
+        error: null,
         capacity: 0
     }
     componentDidMount() {
@@ -48,10 +49,12 @@ class Floors extends React.Component {
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.setState({error: error});
                         this.props.increment();
                     })
             }).catch((error) => {
                 console.log(error);
+                this.setState({error: error});
                 this.props.increment();
             })
     }
@@ -67,7 +70,7 @@ class Floors extends React.Component {
                 this.props.history.push('/app');
             })
             .catch((error) => {
-                this.setState({ accessing: false, error: error.message });
+                this.setState({ accessing: false, error: error });
             })
     }    
     render() {

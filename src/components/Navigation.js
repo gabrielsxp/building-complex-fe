@@ -1,8 +1,9 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter, Link } from 'react-router-dom';
 import {getBuilding} from '../services/auth';
+import * as s from '../constants/servers';
 import styled from 'styled-components';
 
 const Styles = styled.div`
@@ -58,11 +59,11 @@ class Navigation extends React.Component {
                         </Nav>
                         <Nav>
                             {
-                                getBuilding() ? <Navbar.Text>{`Prédio atual: ${getBuilding()}`}</Navbar.Text> : null
+                                getBuilding() ? <Link to={`/building/${getBuilding()}`}><Navbar.Text>{`Prédio atual: ${getBuilding()}`}</Navbar.Text></Link> : null
                             }
                             &nbsp;&nbsp;
                             {
-                                <Navbar.Text><b style={{color: '#1aff1a'}}>N→S: {this.props.i%5 + 1}</b></Navbar.Text>
+                                <Navbar.Text><b style={{color: '#1aff1a'}}>N→S: {this.props.i%s.servers.length + 1}</b></Navbar.Text>
                             }
                         </Nav>
                     </Navbar.Collapse>

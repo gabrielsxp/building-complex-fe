@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import { withRouter, Link } from 'react-router-dom';
-import { logout, getOutOfBuilding } from '../services/auth';
+import { logout, getOutOfBuilding, getRole, setRole } from '../services/auth';
 import axios from '../axios';
 import * as s from '../constants/servers';
 
@@ -66,16 +66,22 @@ class Tests extends React.Component {
         error: null,
         building: '',
         success: null,
+        admin: true,
+        visitor: true,
+        employee: true,
+        working: false,
         people: 1,
+        role: null,
         confirmationShow: false
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        this.setState({ role: getRole() });
         this.getAllBuildings();
     }
 
     getAllBuildings = () => {
-        axios.get(`${s.servers[this.props.i%s.servers.length]}/buildings`).then((response) => {
+        axios.get(`${s.servers[this.props.i % s.servers.length]}/buildings`).then((response) => {
             this.props.increment();
             const data = response.data.data;
             const buildings = Object.values(data);
@@ -84,10 +90,10 @@ class Tests extends React.Component {
                 return b = b.concat(building.name);
             })
             console.log(response);
-            this.setState({buildings: b, building: b[0], capacity: response.data.capacity});
+            this.setState({ buildings: b, building: b[0], capacity: response.data.capacity });
         }).catch((error) => {
             this.props.increment();
-            this.setState({error: error.message});
+            this.setState({ error: error.message });
         });
     }
 
@@ -125,7 +131,7 @@ class Tests extends React.Component {
     floodUsers = (e) => {
         e.preventDefault();
         this.setState({ error: null, submiting: true });
-        axios.post(`${s.servers[this.props.i%s.servers.length]}/users/random`, { numberOfPeople: this.state.people })
+        axios.post(`${s.servers[this.props.i % s.servers.length]}/users/random`, { numberOfPeople: this.state.people })
             .then((response) => {
                 this.props.increment();
                 this.setState({ submiting: false, success: `${response.data.success} pessoas adicionadas` });
@@ -138,8 +144,21 @@ class Tests extends React.Component {
             })
     }
     handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({ submiting: true, error: null, success: null });
+        const visitor = this.state.visitor ? 'visitor' : null;
+        const employee = this.state.employee ? 'employee' : null;
+        const admin = this.state.admin ? 'admin' : null;
+        var permissions = [];
+        if(visitor){
+            permissions.push(visitor);
+        }
+        if(employee){
+            permissions.push(employee);
+        }
+        if(admin){
+            permissions.push(admin);
+        }
         var buildings = [];
         console.log(this.state.buildingQtd);
         for (let i = 1; i <= this.state.buildingQtd; i++) {
@@ -148,11 +167,12 @@ class Tests extends React.Component {
                 name: `Predio-${Math.random().toString(36).substr(2, 9)}`,
                 capacity: capacity,
                 numberOfFloors: parseInt(Math.random() * (this.state.buildingFloorsQtd - 1) + 1),
-                floorsCapacity: capacity
+                floorsCapacity: capacity,
+                permissions: permissions
             }
             buildings.push(building);
         }
-        axios.post(`${s.servers[this.props.i%s.servers.length]}/buildings`, buildings)
+        axios.post(`${s.servers[this.props.i % s.servers.length]}/buildings`, buildings)
             .then((response) => {
                 this.props.increment();
                 this.setState({ success: 'Prédios criados com sucesso. Redirecionando...', error: null });
@@ -169,16 +189,16 @@ class Tests extends React.Component {
     handleConfirmationDelete = (e) => {
         e.preventDefault();
         this.setState({ submiting: true });
-        axios.delete(`${s.servers[this.props.i%s.servers.length]}/buildings`)
+        axios.delete(`${s.servers[this.props.i % s.servers.length]}/buildings`)
             .then((response) => {
                 this.props.increment();
                 this.setState({ submiting: false });
                 this.handleConfirmationClose();
                 this.handleLogout();
-                axios.delete(`${s.servers[this.props.i%s.servers.length]}/users`)
+                axios.delete(`${s.servers[this.props.i % s.servers.length]}/users`)
                     .then((response) => {
                         this.props.increment();
-                        axios.delete(`${s.servers[this.props.i%s.servers.length]}/floors`)
+                        axios.delete(`${s.servers[this.props.i % s.servers.length]}/floors`)
                             .then((response) => {
                                 this.props.increment();
                                 this.props.history.push('/app');
@@ -203,17 +223,29 @@ class Tests extends React.Component {
     handleBuildingLotation = (e) => {
         console.log(this.state.building);
         e.preventDefault();
-        this.setState({error: null, submiting: true});
-        axios.post(`${s.servers[this.props.i%s.servers.length]}/building/${this.state.building}/fill`)
+        this.setState({ error: null, submiting: true });
+        axios.post(`${s.servers[this.props.i % s.servers.length]}/building/${this.state.building}/fill`)
             .then((response) => {
                 this.props.increment();
-                this.setState({submiting: false, success: "Prédio lotado com sucesso"});
+                this.setState({ submiting: false, success: "Prédio lotado com sucesso" });
                 this.handleCloseThree();
             })
             .catch((error) => {
                 this.props.increment();
-                this.setState({submiting: false, error: error.message});
+                this.setState({ submiting: false, error: error.message });
                 this.handleCloseThree();
+            });
+    }
+
+    makeSuperUser = () => {
+        this.setState({error: null, working: true});
+        axios.patch(`${s.servers[this.props.i % s.servers.length]}/super/me`)
+            .then((response) => {
+                this.setState({working: false, success: 'Permissões atualizadas'});
+                setRole('Administrador');
+            })
+            .catch((error) => {
+                this.setState({ working: false, error: error})
             });
     }
 
@@ -284,6 +316,28 @@ class Tests extends React.Component {
                                 <Button variant="primary" onClick={this.handleShowThree}>Opções</Button>
                             </div>
                         </Col>
+                        <Col lg={6} xs={12}>
+                            <div className="testSection">
+                                <h3>Modo Administrador</h3>
+                                <p className="text-muted"><b>Descrição: </b>Atualiza permissões para Administrador ao usuário atual do sistema que seja Funcionário</p>
+                                <Button variant="primary" type="submit" onClick={this.makeSuperUser} disabled={this.state.working || this.state.role !== 'Funcionário'}>
+                                    {
+                                        !this.state.working ? 'Atualizar' :
+                                            <div>
+                                                Atualizando...&nbsp;&nbsp;
+                                    <Spinner
+                                                    as="span"
+                                                    animation="border"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="false"
+                                                />
+                                                <span className="sr-only">Acessando...</span>
+                                            </div>
+                                    }
+                                </Button>
+                            </div>
+                        </Col>
                     </Row>
                     <Modal
                         show={this.state.show}
@@ -322,6 +376,12 @@ class Tests extends React.Component {
                                     <Form.Text className="text-muted">
                                         Número máximo de andares que serão escolhidos através de uma função randômica
                                 </Form.Text>
+                                </Form.Group>
+                                <Form.Group controlId="exampleForm.ControlSelect2">
+                                    <Form.Label>Permissões de cada andar</Form.Label>
+                                    <Form.Check checked={this.state.visitor} onChange={e => this.setState({visitor: e.target.checked})} type='checkbox' id='check-visitor' label='Visitante'></Form.Check>
+                                    <Form.Check checked={this.state.employee} onChange={e => this.setState({employee: e.target.checked})} type='checkbox' id='check-employee' label='Funcionário'></Form.Check>
+                                    <Form.Check checked disabled type='checkbox' id='checkadmin' label='Administrador'></Form.Check>
                                 </Form.Group>
                                 <Button variant="primary" type="submit" onClick={this.handleSubmit} disabled={this.state.submiting}>
                                     {
@@ -448,7 +508,7 @@ class Tests extends React.Component {
                             <Form>
                                 <Form.Group controlId="exampleForm.ControlSelect1">
                                     <Form.Label>Escolha o edifício que será lotado</Form.Label>
-                                    <Form.Control as="select" value={this.state.building} onChange={e => this.setState({building: e.target.value})}>
+                                    <Form.Control as="select" value={this.state.building} onChange={e => this.setState({ building: e.target.value })}>
                                         {
                                             this.state.buildings.map((name, index) => {
                                                 return <option key={index} index={index}>{name}</option>

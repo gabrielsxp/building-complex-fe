@@ -67,9 +67,10 @@ class SignIn extends React.Component {
                     this.props.history.push(this.props.location.state.from.pathname);
                 })
                 .catch((error) => {
+                    console.log(error);
                     this.props.increment()
                     this.setState({submiting: false});
-                    this.setState({error: error.message})
+                    this.setState({error: error})
                 })
             } else {
                     axios.post(`${s.servers[this.props.i%s.servers.length] + this.props.location.state.from.pathname}`, funcionario) //building/nomePredio
@@ -80,8 +81,9 @@ class SignIn extends React.Component {
                         this.props.history.push(this.props.location.state.from.pathname);
                     })
                     .catch((error) => {
+                        console.log(error);
                         this.setState({submiting: false});
-                        this.setState({error: error.message})
+                        this.setState({error: error})
                     })
             }
         }

@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 import { withRouter } from 'react-router-dom';
 import axios from '../axios';
 import * as s from '../constants/servers';
@@ -46,7 +49,7 @@ class Floor extends React.Component {
         const dataFuncionario = {email: this.state.email, password: this.state.password};
         const dataVisitante = {email: this.state.email};
         this.setState({ accessing: true });
-        axios.post(`${s.servers[this.props.i%s.servers.length]}/${url}/${this.state.floor}` , this.props.role === 'Funcionário' ? dataFuncionario : dataVisitante)
+        axios.post(`${s.servers[this.props.i%s.servers.length] + url}/${this.state.floor}` , this.props.role === 'Funcionário' || this.props.role === 'Administrador' ? dataFuncionario : dataVisitante)
             .then((response) => {
                 this.props.increment();
                 console.log(url + '/' + this.state.floor);
@@ -56,11 +59,10 @@ class Floor extends React.Component {
             .catch((error) => {
                 this.props.increment();
                 console.log(error);
-                this.setState({ accessing: false, error: error.message });
+                this.setState({ accessing: false, error: error });
             })
     }
     handleShow = (floor) => {
-        console.log('entrei aqui');
         this.setState({ show: true, floor: floor });
     }
     handleClose = () => {
@@ -107,6 +109,16 @@ class Floor extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
+                        <Row>
+                            <Col xs={12}>
+                                {
+                                    this.state.error ? <Alert variant="danger">
+                                        {this.state.error}
+                                    </Alert>
+                                    : null
+                                }
+                            </Col>
+                        </Row>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Digite seu email</Form.Label>
                             <Form.Control required type="email" placeholder="Digite seu email" onChange={e => this.setState({ email: e.target.value })} />
@@ -115,7 +127,7 @@ class Floor extends React.Component {
                             </Form.Text>
                         </Form.Group>
                         {
-                            this.props.role === 'Funcionário' ?
+                            this.props.role === 'Funcionário' || this.props.role === 'Administrador' ?
                                 <div>
                                     <Form.Group controlId="formBasicPassword">
                                     <Form.Label>Senha</Form.Label>

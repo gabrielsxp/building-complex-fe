@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# building-complex-fe
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+##### Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
+> Considere um grande e movimentado complexo de edifícios comerciais de escritórios. Por
+motivos de segurança, é necessário realizar o controle de acesso de todas as pessoas que
+frequentam o complexo habitual (funcionários) ou esporadicamente (visitantes, clientes etc.).
+Políticas de acesso diferentes são aplicáveis a funcionários da administração do condomínio,
+funcionários das empresas que possuem escritórios no local e visitantes em geral. Na entrada do
+complexo, há um conjunto de pontos de acesso (como catracas eletrônicas), por meio dos quais
+as pessoas se identificam (usando biometria, por exemplo) antes de serem autorizadas a entrar
+nas instalações. Pontos de acesso também são instalados na entrada de cada prédio e na
+entrada de cada andar de um prédio, uma vez que funcionários das empresas condôminas,
+assim como os visitantes, só devem ter acesso a certas partes do complexo. Finalmente,
+também por motivos de segurança em caso de emergências, o complexo possui uma
+capacidade de lotação máxima total, por prédio e por andar. Desta forma, um visitante, mesmo
+que possua as credenciais necessárias, só pode ser admitido no complexo, prédio ou andar se
+as respectivas capacidades máximas não tiverem sido excedidas. Note que funcionários não
+estão sujeitos a este controle de lotação, embora devam ser contados para fins de cálculo da
+capacidade de ocupação disponível. Os parâmetros do sistema, em particular as políticas de
+acesso aplicáveis aos três tipos de ocupantes do edifício e as capacidades máximas (dos
+complexo, dos edifícios e de cada andar), devem ser definidos no início da operação do sistema
+pelo(a) administrador(a) do condomínio, podendo ser reajustados por ele(a) a qualquer momento.
+## Instalação
+#### Lembrando que esta versão está configurada para acessar o banco de dados localmente (127.0.0.1:27017)
+1. Tenha o node e o npm instalados. Caso queira executar localmente, tenha também o MongoDB instalado.
+2. Clone o repositório via terminal.
+3. Acesse a pasta de destino via cd project-building-api
+4. Execute sudo npm install
+5. Execute sudo npm start
+6. Acesse a aplicação localmente em (http://127.0.0.1:3000/)

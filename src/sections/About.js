@@ -71,8 +71,18 @@ const about = () => {
 						complexo, dos edifícios e de cada andar), devem ser definidos no início da operação do sistema
 						pelo(a) administrador(a) do condomínio, podendo ser reajustados por ele(a) a qualquer momento.
 						</p>
-						<a>https://github.com/gabrielsxp/project-building-api</a>
-						<a>https://github.com/gabrielsxp/building-complex-fe</a>
+                        <p><b>Links Para o repositório da aplicação</b></p>
+                        <div style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            flexFlow: "row",
+                            justifyContent: "flex-start",
+                            alignItems: "flex-start"
+                        }}>
+                            <a className="btn btn-primary" style={{marginRight: '20px'}} href="https://github.com/gabrielsxp/project-building-api" target="_blank" rel="noopener noreferrer">Servidor</a>
+                            <br />
+                            <a className="btn btn-primary" href="https://github.com/gabrielsxp/building-complex-fe" target="_blank" rel="noopener noreferrer">Cliente</a>
+                        </div>
                     </Col>
                     <Col lg={4} md={4}>
                         <div className="wrappingContent">

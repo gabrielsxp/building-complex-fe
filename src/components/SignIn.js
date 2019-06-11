@@ -138,7 +138,7 @@ class SignIn extends React.Component {
                                         this.state.role === 'Funcionário' ? <div>
                                             <Form.Group controlId="formBasicPassword">
                                                 <Form.Label>Senha</Form.Label>
-                                                <Form.Control required type="password" placeholder="Password" onChange={(e) => this.setState({password: e.target.value})} />
+                                                <Form.Control required type="password" placeholder="Digite sua senha" onChange={(e) => this.setState({password: e.target.value})} />
                                                 <Form.Text className="text-muted">Informe sua senha numérica de 6 dígitos</Form.Text>
                                             </Form.Group>
                                         </div>

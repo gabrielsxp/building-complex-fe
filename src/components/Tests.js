@@ -136,6 +136,7 @@ class Tests extends React.Component {
                 this.props.increment();
                 this.setState({ submiting: false, success: `${response.data.success} pessoas adicionadas` });
                 this.handleCloseTwo();
+                this.props.scrollTop();
             })
             .catch((error) => {
                 this.props.increment();
@@ -178,11 +179,13 @@ class Tests extends React.Component {
                 this.setState({ success: 'Prédios criados com sucesso. Redirecionando...', error: null });
                 this.handleClose();
                 this.props.history.push('/app');
+                this.props.scrollTop();
             })
             .catch((error) => {
                 this.props.increment();
                 this.setState({ error: error.message });
                 this.handleClose();
+                this.props.scrollTop();
             });
     }
 
@@ -201,22 +204,26 @@ class Tests extends React.Component {
                         axios.delete(`${s.servers[this.props.i % s.servers.length]}/floors`)
                             .then((response) => {
                                 this.props.increment();
+                                this.props.scrollTop();
                                 this.props.history.push('/app');
                             })
                             .catch((error) => {
                                 this.props.increment();
                                 this.setState({ error: error.message });
+                                this.props.scrollTop();
                             })
                     })
                     .catch((error) => {
                         this.props.increment();
                         this.setState({ error: error.message });
+                        this.props.scrollTop();
                     })
             })
             .catch((error) => {
                 this.props.increment();
                 this.setState({ error: error.message, submiting: false });
                 this.handleConfirmationClose();
+                this.props.scrollTop();
             })
     }
 
@@ -229,11 +236,13 @@ class Tests extends React.Component {
                 this.props.increment();
                 this.setState({ submiting: false, success: "Prédio lotado com sucesso" });
                 this.handleCloseThree();
+                this.props.scrollTop();
             })
             .catch((error) => {
                 this.props.increment();
                 this.setState({ submiting: false, error: error.message });
                 this.handleCloseThree();
+                this.props.scrollTop();
             });
     }
 
@@ -243,9 +252,11 @@ class Tests extends React.Component {
             .then((response) => {
                 this.setState({working: false, success: 'Permissões atualizadas'});
                 setRole('Administrador');
+                this.props.scrollTop();
             })
             .catch((error) => {
-                this.setState({ working: false, error: error})
+                this.setState({ working: false, error: error});
+                this.props.scrollTop();
             });
     }
 
@@ -258,26 +269,38 @@ class Tests extends React.Component {
                     <hr className="styledHr" />
                     <Row>
                         {
-                            this.state.success ? <div>
-                                <Col xs={12}>
+                            this.state.success ?
+                                <Col lg={{span: 8, offset: 2}} xs={12}>
                                     <Alert variant="success">
-                                        {this.state.success}
-                                        <br /><br />
-                                        <Link to="/app"><Button variant="primary">Voltar para o Complexo</Button></Link>
+                                        <div style={{
+                                            display: 'flex',
+                                            flexFlow: 'column',
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}>
+                                            {this.state.success}
+                                            <br /><br />
+                                            <Link to="/app"><Button variant="primary">Voltar para o Complexo</Button></Link>
+                                        </div>
                                     </Alert>
-                                </Col>
-                            </div> : null
+                                </Col> : null
                         }
                     </Row>
                     <Row>
                         {
-                            this.state.error ? <div>
-                                <Col xs={12}>
-                                    <Alert variant="danger">
+                            this.state.error ?
+                            <Col lg={{span: 8, offset: 2}} xs={12}>
+                                <Alert variant="danger">
+                                    <div style={{
+                                        display: 'flex',
+                                        flexFlow: 'column',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
                                         {this.state.error}
-                                    </Alert>
-                                </Col>
-                            </div> : null
+                                    </div>
+                                </Alert>
+                            </Col> : null
                         }
                     </Row>
                     <Row>
@@ -305,8 +328,8 @@ class Tests extends React.Component {
                         <Col lg={6} xs={12}>
                             <div className="testSection">
                                 <h3>Expulsar o usuário atual do prédio</h3>
-                                <p className="text-muted"><b>Descrição: </b>Remover tanto o prédio que o usuário está, quanto o token de autenticação atual salvo na sessão</p>
-                                <Button variant="danger" onClick={this.handleLogout}>Expulsar Usuário</Button>
+                                <p className="text-muted"><b>Descrição: </b>Remover o usuário que seja <b>visitante</b> do prédio atual.</p>
+                                <Button disabled={this.state.role !== 'Visitante'} variant="danger" onClick={this.handleLogout}>Expulsar Usuário</Button>
                             </div>
                         </Col>
                         <Col lg={6} xs={12}>
@@ -408,7 +431,7 @@ class Tests extends React.Component {
                         </Modal.Footer>
                     </Modal>
                     <Modal
-                        size="sm"
+                        size="md"
                         centered={true}
                         show={this.state.confirmationShow}
                         onHide={this.handleConfirmationClose}

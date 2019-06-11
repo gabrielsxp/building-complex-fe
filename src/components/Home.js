@@ -84,26 +84,6 @@ class Home extends React.Component {
             this.props.history.push(path);
         }
     }
-    sendRequest = () => {
-        const data = {
-            name: this.state.name,
-            numberOfFloors: this.state.numberOfFloors,
-            capacity: this.state.capacity,
-            floorsCapacity: this.state.floorsCapacity
-        }
-        axios.post(`${s[this.props.i%s.servers.length]}/building`, data).then((response) => {
-            console.log(data);
-            console.log(response);
-            this.handleClose();
-            this.setState({ submit: false });
-            this.props.increment();
-        }).catch((error) => {
-            console.log(error);
-            this.handleClose();
-            this.setState({ submit: false });
-            this.props.increment();
-        });
-    }
     onPageChanged = data => {
         const { buildings } = this.state;
         const { currentPage, totalPages, pageLimit } = data;

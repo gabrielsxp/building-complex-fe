@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import About from '../sections/About';
 import bgImg from '../assets/herobg.jpg';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import { Link,  Events, scrollSpy } from 'react-scroll'
+import { Link,  Events, scrollSpy } from 'react-scroll';
 import {Link as L} from 'react-router-dom';
 
 const Styles = styled.div`

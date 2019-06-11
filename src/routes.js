@@ -28,16 +28,16 @@ const PrivateRoute = ({ component: Component = null, render: Render = null, ...r
     />
 );
 
-const Routes = ({i,increment}) => (
+const Routes = ({i,increment,scrollTop}) => (
   <BrowserRouter>
     <Navigation i={i} />
     <Switch>
         <Route exact path="/" component={Landing}></Route>
         <Route exact path="/app" render={() => <Home i = {i} increment={increment}/>}></Route>
-        <PrivateRoute path="/building/:name/:floor" render={() => <FloorAccessed i = {i} increment={increment}/>}></PrivateRoute>
-        <PrivateRoute path="/building/:name" render={() => <Floors i = {i} increment={increment}/>}></PrivateRoute>
-        <Route exact path="/tests" render={() => <Tests i = {i} increment={increment}/>}></Route>
-        <Route exact path="/signin" render={() => <SignIn i = {i} increment={increment}/>}></Route>
+        <PrivateRoute path="/building/:name/:floor" render={() => <FloorAccessed scrollTop={scrollTop} i = {i} increment={increment}/>}></PrivateRoute>
+        <PrivateRoute path="/building/:name" render={() => <Floors scrollTop={scrollTop} i = {i} increment={increment}/>}></PrivateRoute>
+        <Route exact path="/tests" render={() => <Tests scrollTop={scrollTop} i = {i} increment={increment}/>}></Route>
+        <Route exact path="/signin" render={() => <SignIn scrollTop={scrollTop} i = {i} increment={increment}/>}></Route>
     </Switch>
     <Footer />
   </BrowserRouter>

@@ -46,6 +46,7 @@ class FloorAccessed extends React.Component {
         success: null,
         show: false,
         permissions: [],
+        lotation: 0,
         admin: false,
         employee: false,
         visitor: false,
@@ -56,7 +57,9 @@ class FloorAccessed extends React.Component {
         axios.get(s.servers[this.props.i % s.servers.length] + this.props.location.pathname)
             .then((response) => {
                 this.props.increment();
-                const permissions = response.data.allows;
+                console.log(response.data);
+                const permissions = response.data.floor.allows;
+                const lotation = response.data.lotation;
                 var translatedPermissions = [];
                 permissions.map((p) => {
                     if (p === 'visitor') {
@@ -68,7 +71,7 @@ class FloorAccessed extends React.Component {
                     }
                     return translatedPermissions;
                 })
-                this.setState({ permissions: translatedPermissions });
+                this.setState({ permissions: translatedPermissions, lotation });
                 permissions.map((type) => {
                     if (type === 'visitor') {
                         this.setState({ visitor: true });
@@ -81,7 +84,7 @@ class FloorAccessed extends React.Component {
                     }
                     return type;
                 })
-                this.setState({ capacity: response.data.capacity });
+                this.setState({ capacity: response.data.floor.capacity });
             })
             .catch((error) => {
                 this.props.increment();
@@ -171,7 +174,8 @@ class FloorAccessed extends React.Component {
                         <Col lg={{ span: 8, offset: 2 }} xs={12}>
                             <Alert variant="primary">
                                 <p style={{ textAlign: 'center' }}>Você está atualmente no {floor}º andar </p>
-                                <p style={{ textAlign: 'center' }}>Capacidade: {this.state.capacity} pessoas</p>
+                                <p style={{ textAlign: 'center' }}>Capacidade: <b>{this.state.capacity}</b> pessoas</p>
+                                <p style={{ textAlign: 'center' }}>Existem <b>{this.state.lotation}</b> pessoas neste andar</p>
                                 <p style={{ textAlign: 'center' }}><b>Permite:&nbsp;</b> {this.state.permissions.join(', ')}</p>
                             </Alert>
                         </Col>
@@ -233,8 +237,8 @@ class FloorAccessed extends React.Component {
                                     <Modal.Body>
                                         {
                                             this.state.error ?
-                                            <Alert variant="danger">{this.state.error}</Alert>
-                                            : null
+                                                <Alert variant="danger">{this.state.error}</Alert>
+                                                : null
                                         }
                                         <Form>
                                             <Form.Group>

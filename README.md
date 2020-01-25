@@ -1,6 +1,6 @@
 # building-complex-fe
 <p align="center">
-    <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building-first.jpg" alt="Building Complex Landing"></img>
+   <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building.gif" alt="Demo of Building Complex"></img>
 </p>
 ## Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
 > Considere um grande e movimentado complexo de edifícios comerciais de escritórios. Por
@@ -41,7 +41,3 @@ Funcionalidades
 - Permite a simulação de vários usuários simultâneos em um edifício
 - No modo de administração, o usuário que possuir tais credenciais poderá alterar o nível de acesso de qualquer andar para qualquer nível de acesso
 - Distribui a requisição para cada servidor presente na lista de servidores na pasta de constantes de forma circular.
-
-<p align="center">
-   <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building.gif" alt="Demo of Building Complex"></img>
-</p>

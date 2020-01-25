@@ -1,5 +1,7 @@
 # building-complex-fe
-
+<p align="center">
+    <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building-first.jpg" alt="Building Complex Landing"></img>
+</p>
 ##### Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
 > Considere um grande e movimentado complexo de edifícios comerciais de escritórios. Por
 motivos de segurança, é necessário realizar o controle de acesso de todas as pessoas que

@@ -2,7 +2,9 @@
 <p align="center">
    <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building.gif" alt="Demo of Building Complex"></img>
 </p>
+
 ## Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
+
 > Considere um grande e movimentado complexo de edifícios comerciais de escritórios. Por
 motivos de segurança, é necessário realizar o controle de acesso de todas as pessoas que
 frequentam o complexo habitual (funcionários) ou esporadicamente (visitantes, clientes etc.).
@@ -30,7 +32,7 @@ pelo(a) administrador(a) do condomínio, podendo ser reajustados por ele(a) a qu
 5. Execute sudo npm start
 6. Acesse a aplicação localmente em (http://127.0.0.1:3000/)
 
-Funcionalidades
+## Funcionalidades
 - A imagem de cada prédio é alterada de acordo com a quantidade de andares presentes
 - O prédio não permite a entrada de outros usuários quando a lotação é atingida
 - Permite a criação de prédios aleatórios, com níveis de acesso e quantidade de andares diferentes

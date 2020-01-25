@@ -2,7 +2,7 @@
 <p align="center">
     <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building-first.jpg" alt="Building Complex Landing"></img>
 </p>
-##### Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
+## Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
 > Considere um grande e movimentado complexo de edifícios comerciais de escritórios. Por
 motivos de segurança, é necessário realizar o controle de acesso de todas as pessoas que
 frequentam o complexo habitual (funcionários) ou esporadicamente (visitantes, clientes etc.).
@@ -29,3 +29,19 @@ pelo(a) administrador(a) do condomínio, podendo ser reajustados por ele(a) a qu
 4. Execute sudo npm install
 5. Execute sudo npm start
 6. Acesse a aplicação localmente em (http://127.0.0.1:3000/)
+
+Funcionalidades
+- A imagem de cada prédio é alterada de acordo com a quantidade de andares presentes
+- O prédio não permite a entrada de outros usuários quando a lotação é atingida
+- Permite a criação de prédios aleatórios, com níveis de acesso e quantidade de andares diferentes
+- Permite a destruição total de todos os prédios e expulsão de todas as pessoas presentes nos mesmos
+- Nível de requisição de credenciais customizada para cada tipo de nível de acesso
+- Possibilidade de sair de um andar e entrar em qualquer outro, desde que possua o nível de acesso adequado
+- Possibilidade de sair de um prédio e entrar em outro, desde que o mesmo permita o acesso
+- Permite a simulação de vários usuários simultâneos em um edifício
+- No modo de administração, o usuário que possuir tais credenciais poderá alterar o nível de acesso de qualquer andar para qualquer nível de acesso
+- Distribui a requisição para cada servidor presente na lista de servidores na pasta de constantes de forma circular.
+
+<p align="center">
+   <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building.gif" alt="Demo of Building Complex"></img>
+</p>

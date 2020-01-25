@@ -3,8 +3,9 @@
    <img src="https://github.com/gabrielsxp/building-complex-fe/blob/master/building.gif" alt="Demo of Building Complex"></img>
 </p>
 
-## Este é o front-end para a API (https://github.com/gabrielsxp/project-building-api)
+A API REST utilizada como base para esta aplicação se encontra em [Building Complex Node JS API REST](https://github.com/gabrielsxp/project-building-api)
 
+## Requisitos
 > Considere um grande e movimentado complexo de edifícios comerciais de escritórios. Por
 motivos de segurança, é necessário realizar o controle de acesso de todas as pessoas que
 frequentam o complexo habitual (funcionários) ou esporadicamente (visitantes, clientes etc.).
@@ -24,6 +25,13 @@ capacidade de ocupação disponível. Os parâmetros do sistema, em particular a
 acesso aplicáveis aos três tipos de ocupantes do edifício e as capacidades máximas (dos
 complexo, dos edifícios e de cada andar), devem ser definidos no início da operação do sistema
 pelo(a) administrador(a) do condomínio, podendo ser reajustados por ele(a) a qualquer momento.
+
+## Tecnologias utilizadas
+- HTML5
+- CSS3
+- Javascript
+- React JS
+
 ## Instalação
 1. Tenha o node e o npm instalados. Caso queira executar localmente, tenha também o MongoDB instalado.
 2. Clone o repositório via terminal.
